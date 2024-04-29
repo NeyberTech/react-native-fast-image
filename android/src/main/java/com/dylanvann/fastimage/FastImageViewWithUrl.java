@@ -142,7 +142,8 @@ class FastImageViewWithUrl extends AppCompatImageView {
                             .apply(FastImageViewConverter
                                     .getOptions(context, imageSource, mSource)
                                     .placeholder(mDefaultSource) // show until loaded
-                                    .fallback(mDefaultSource)); // null will not be treated as error
+                                    .fallback(mDefaultSource))
+                            .transform(new ResizeTransformation());
 
             if (key != null)
                 builder.listener(new FastImageRequestListener(key));
