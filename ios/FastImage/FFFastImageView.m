@@ -1,4 +1,5 @@
 #import "FFFastImageView.h"
+#import "FFFastImageUA.h"
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <SDWebImage/UIView+WebCache.h>
 
