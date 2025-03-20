@@ -1,4 +1,5 @@
 #import "FFFastImageView.h"
+#import "FFFastImageUA.h"
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <SDWebImage/UIView+WebCache.h>
 
@@ -159,6 +160,8 @@
         NSDictionary* headers = _source.headers;
         SDWebImageDownloaderRequestModifier* requestModifier = [SDWebImageDownloaderRequestModifier requestModifierWithBlock: ^NSURLRequest* _Nullable (NSURLRequest* _Nonnull request) {
             NSMutableURLRequest* mutableRequest = [request mutableCopy];
+            NSString *userAgent = [FFFastImageUA generateUserAgent];
+            [mutableRequest setValue:userAgent forHTTPHeaderField:@"User-Agent"];
             for (NSString* header in headers) {
                 NSString* value = headers[header];
                 [mutableRequest setValue: value forHTTPHeaderField: header];
