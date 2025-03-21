@@ -6,12 +6,9 @@
 static NSString *_cachedUserAgent = nil;
 static dispatch_once_t onceToken;
 
-+ (NSString *)generateUserAgent {
++ (NSString *)getCustomUserAgent {
 
     dispatch_once(&onceToken, ^{
-        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?: @"";
-        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: @"";
-        NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] ?: @"";
         NSString *userAgentAppInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UserAgentAppInfo"] ?: @"";
         NSString *cfnVersion = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"].infoDictionary[@"CFBundleShortVersionString"];
         struct utsname u;
@@ -20,8 +17,6 @@ static dispatch_once_t onceToken;
 
         if (userAgentAppInfo) {
             _cachedUserAgent = [NSString stringWithFormat:@"%@ CFNetwork/%@ Darwin/%@", userAgentAppInfo, cfnVersion, darwinVersion];
-        } else {
-            _cachedUserAgent = [NSString stringWithFormat:@"%@/%@.%@ CFNetwork/%@ Darwin/%@", appName, version, buildNumber, cfnVersion, darwinVersion];
         }
     });
 
