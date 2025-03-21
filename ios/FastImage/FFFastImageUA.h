@@ -2,6 +2,6 @@
 
 @interface FFFastImageUA : NSObject
 
-+ (NSString *)generateUserAgent;
++ (NSString *)getCustomUserAgent;
 
 @end
